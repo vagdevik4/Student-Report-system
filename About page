@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - Student Report System</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #ff6a6a, #3a8dff);
+    color: white;
+}
+
+/* NAVBAR */
+.navbar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 50px; 
+    background: rgba(255,255,255,0.1); 
+    backdrop-filter: blur(10px); 
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    z-index: 1000;
+} 
+
+.logo { 
+    font-size: 22px; 
+    font-weight: bold; 
+    color: white; 
+} 
+
+nav a { 
+    margin: 0 10px; 
+    text-decoration: none; 
+    color: white; 
+    font-size: 14px; 
+} 
+
+nav a:hover { 
+    text-decoration: underline; 
+}
+
+/* SECTIONS */
+.section {
+    padding: 120px 50px 50px;
+    text-align: center;
+}
+
+/* HERO CARD */
+.card {
+    margin-top: 20px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    justify-items: center;
+}
+
+/* GLASS BOX */
+.box {
+    width: 260px;
+    height: 260px;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.25);
+
+    text-align: center;
+    transition: 0.4s ease;
+}
+
+/* REFLECTION EFFECT */
+.box::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+    );
+    transform: rotate(25deg);
+    transition: 0.6s;
+}
+
+.box:hover::before {
+    top: 100%;
+    left: 100%;
+}
+
+/* MOUSE FOLLOW GLOW */
+.box::after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 60%);
+    border-radius: 50%;
+    pointer-events: none;
+
+    top: var(--y, 50%);
+    left: var(--x, 50%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.box:hover::after {
+    opacity: 1;
+}
+
+/* HOVER LIFT */
+.box:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* BUTTON */
+.btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: #ddd;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div id="navbar"></div>
+
+<!-- HERO -->
+<section class="section">
+    <h1>Translucent Student Ecosystem</h1>
+    <div class="card">
+        <p>
+            A high-definition platform that transforms student data into a clear, 
+            structured and interactive experience. Manage attendance, reports, 
+            timetables and assignments — all in one place.
+        </p>
+
+        <a href="login.html" class="btn">Login</a>
+        <a href="register.html" class="btn">Create Account</a>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+    <h2>About the System</h2>
+
+    <div class="grid">
+        <div class="box">
+            <h3>Refractive Design</h3>
+            <p>Clean UI with glass layers to organize student data clearly.</p>
+        </div>
+
+        <div class="box">
+            <h3>Smart Dashboard</h3>
+            <p>Track academic performance in one unified dashboard.</p>
+        </div>
+
+        <div class="box">
+            <h3>Clear Reports</h3>
+            <p>View marks, grades, and analytics with clarity.</p>
+        </div>
+
+        <div class="box">
+            <h3>Assignments</h3>
+            <p>Manage submissions and deadlines efficiently.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+    <h2>Dashboard Features</h2>
+
+    <div class="grid">
+        <div class="box">
+            <h3>Attendance</h3>
+            <p>Monitor attendance percentage easily.</p>
+        </div>
+
+        <div class="box">
+            <h3>Report Card</h3>
+            <p>Detailed academic performance breakdown.</p>
+        </div>
+
+        <div class="box">
+            <h3>Time Table</h3>
+            <p>Organized daily schedule view.</p>
+        </div>
+
+        <div class="box">
+            <h3>Assignments</h3>
+            <p>Track and submit tasks efficiently.</p>
+        </div>
+    </div>
+
+    <a href="login.html" class="btn">Login to Open Dashboard</a>
+</section>
+
+<script>
+// LOAD NAVBAR
+fetch("navbar.html")
+.then(res => res.text())
+.then(data => {
+    document.getElementById("navbar").innerHTML = data;
+});
+
+// MOUSE FOLLOW GLOW
+document.querySelectorAll(".box").forEach(box => {
+    box.addEventListener("mousemove", e => {
+        const rect = box.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        box.style.setProperty("--x", x + "px");
+        box.style.setProperty("--y", y + "px");
+    });
+});
+</script>
+
+</body>
+</html>
