@@ -1,0 +1,208 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Contact Us</title>  
+
+<style>  
+* {  
+    margin: 0;  
+    padding: 0;  
+    box-sizing: border-box;  
+    font-family: 'Segoe UI', sans-serif;  
+}  
+
+body {  
+    min-height: 100vh;  
+    background: linear-gradient(135deg, #ff6a6a, #3a8dff);  
+    color: white;  
+}  
+
+/* NAVBAR */ 
+.navbar {  
+    display: flex;  
+    justify-content: space-between;  
+    align-items: center;  
+    padding: 15px 50px;  
+    background: rgba(255,255,255,0.1);  
+    backdrop-filter: blur(10px);  
+    position: fixed;  
+    top: 0;  
+    width: 100%;  
+    z-index: 1000; 
+}  
+
+.logo {  
+    font-size: 22px;  
+    font-weight: bold;  
+    color: white;  
+}  
+
+nav a {  
+    margin: 0 10px;  
+    text-decoration: none;  
+    color: white;  
+    font-size: 14px;  
+}  
+
+nav a:hover {  
+    text-decoration: underline;  
+}  
+
+/* CENTER BOX */ 
+.center-box {  
+    margin-top: 80px;  
+    height: calc(100vh - 80px);  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+}  
+
+/* CONTACT CARD */ 
+.container {  
+    width: 350px;  
+    padding: 30px;  
+    border-radius: 20px;  
+    background: rgba(255, 255, 255, 0.1);  
+    backdrop-filter: blur(15px);  
+    border: 1px solid rgba(255,255,255,0.3);  
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);  
+    color: white;  
+}  
+
+h2 {  
+    text-align: center;  
+    margin-bottom: 25px;  
+    font-weight: 500;  
+}  
+
+/* INPUTS */ 
+.input-box {  
+    position: relative;  
+    margin-bottom: 20px;  
+}  
+
+.input-box input,  
+.input-box textarea {  
+    width: 100%;  
+    padding: 10px;  
+    background: transparent;  
+    border: none;  
+    border-bottom: 1px solid white;  
+    outline: none;  
+    color: white;  
+    font-size: 16px;  
+}  
+
+.input-box label {  
+    position: absolute;  
+    top: -15px;  
+    left: 0;  
+    font-size: 14px;  
+    color: #ddd;  
+}  
+
+/* BUTTON */ 
+button {  
+    width: 100%;  
+    padding: 10px;  
+    border: none;  
+    border-radius: 8px;  
+    background: white;  
+    color: #333;  
+    font-size: 16px;  
+    cursor: pointer;  
+    transition: 0.3s;  
+}  
+
+button:hover {  
+    background: #ddd;  
+}  
+
+/* INFO */ 
+.info {  
+    margin-top: 15px;  
+    font-size: 14px;  
+    text-align: center;  
+}  
+</style>  
+</head>  
+
+<body>  
+
+<!-- NAVBAR LOAD --> 
+<div id="navbar"></div>  
+
+<!-- CONTACT FORM --> 
+<div class="center-box">  
+    <div class="container">  
+        <h2>Contact Us</h2>  
+
+        <div class="input-box">  
+            <input type="email" id="email" required>  
+            <label>Your Email</label>  
+        </div>  
+
+        <div class="input-box">  
+            <input type="text" id="phone" required>  
+            <label>Phone Number</label>  
+        </div>  
+
+        <div class="input-box">  
+            <textarea id="message" rows="3"></textarea>  
+            <label>Feedback</label>  
+        </div>  
+
+        <button onclick="submitForm()">Submit</button>  
+
+        <div class="info">  
+            <p><b>Email:</b> support@studentreport.com</p>  
+            <p><b>Phone:</b> +91 9876543210</p>  
+        </div>  
+    </div>  
+</div>  
+
+<script>  
+// LOAD NAVBAR  
+fetch("navbar.html")  
+.then(res => res.text())  
+.then(data => {  
+    document.getElementById("navbar").innerHTML = data;  
+
+    // 🔥 REMOVE DASHBOARD IF NOT LOGGED IN
+    if(localStorage.getItem("isLoggedIn") !== "true"){
+        let dashboardLink = document.querySelector('a[href="dashboard.html"]');
+        if(dashboardLink){
+            dashboardLink.style.display = "none";
+        }
+    }
+});  
+
+// SUBMIT FUNCTION  
+function submitForm() {  
+    let email = document.getElementById("email").value;  
+    let phone = document.getElementById("phone").value;  
+    let message = document.getElementById("message").value;  
+
+    if(email === "" || phone === "") {  
+        alert("Please fill required fields!");  
+        return;  
+    }  
+
+    let feedback = { email, phone, message };  
+
+    let allFeedback = JSON.parse(localStorage.getItem("feedbacks")) || [];  
+    allFeedback.push(feedback);  
+    localStorage.setItem("feedbacks", JSON.stringify(allFeedback));  
+
+    alert("Feedback submitted successfully!");  
+
+    document.getElementById("email").value = "";  
+    document.getElementById("phone").value = "";  
+    document.getElementById("message").value = "";  
+}  
+</script>  
+
+</body>  
+</html>
