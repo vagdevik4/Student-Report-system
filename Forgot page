@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forgot Password</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff6a6a, #3a8dff);
+}
+
+/* Glass Card */
+.container {
+    width: 350px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    color: white;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.input-box {
+    margin-bottom: 20px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ddd;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-link a {
+    color: white;
+    text-decoration: none;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+<div id="navbar"></div>
+<div class="container">
+    <h2>Reset Password</h2>
+
+    <div class="input-box">
+        <input type="text" id="username" placeholder="Enter Username">
+    </div>
+
+    <div class="input-box">
+        <input type="password" id="newPassword" placeholder="New Password">
+    </div>
+
+    <button onclick="resetPassword()">Reset Password</button>
+
+    <div class="login-link">
+        <a href="login.html">Back to Login</a>
+    </div>
+</div>
+
+<script>
+function resetPassword() {
+    let username = document.getElementById("username").value;
+    let newPassword = document.getElementById("newPassword").value;
+
+    let storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if(!storedUser){
+        alert("No user found. Please register first.");
+        return;
+    }
+
+    if(username !== storedUser.username){
+        alert("Username not found");
+        return;
+    }
+
+    storedUser.password = newPassword;
+    localStorage.setItem("user", JSON.stringify(storedUser));
+
+    alert("Password updated successfully!");
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
