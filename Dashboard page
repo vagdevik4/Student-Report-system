@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff6a6a, #3a8dff);
+    color: white;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 250px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TOP MENU */
+.menu {
+    flex-grow: 1;
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: white;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.3s;
+    display: block;
+}
+
+.sidebar a:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* BOTTOM LINKS */
+.bottom-links {
+    margin-top: auto;
+}
+
+/* MAIN CONTENT */
+.main {
+    flex: 1;
+    padding: 40px;
+}
+
+/* CARDS */
+.card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+/* SECTIONS */
+.section {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+/* LOGOUT BUTTON */
+button.logout {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    cursor: pointer;
+}
+
+button.logout:hover {
+    background: #ddd;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>Dashboard</h2>
+
+    <!-- TOP MENU -->
+    <div class="menu">
+        <a onclick="showSection('home')">Home</a>
+        <a onclick="showSection('attendance')">Attendance</a>
+        <a onclick="showSection('timetable')">Time Table</a>
+        <a onclick="showSection('report')">Report Card</a>
+        <a onclick="showSection('assignment')">Assignments</a>
+
+        <!-- ✅ CONTACT BELOW ASSIGNMENTS -->
+        <a href="../contact.html">Contact</a>
+    </div>
+
+    <!-- BOTTOM SECTION -->
+    <div class="bottom-links">
+        <button class="logout" onclick="logout()">Logout</button>
+    </div>
+
+</div>
+<!-- MAIN CONTENT -->
+<div class="main">
+
+    <!-- HOME -->
+    <div id="home" class="section active">
+        <h1>Welcome 👋</h1>
+        <div class="card">
+            <p id="welcomeText">Welcome User</p>
+        </div>
+    </div>
+
+    <!-- ATTENDANCE -->
+    <div id="attendance" class="section">
+        <h1>Attendance</h1>
+        <div class="card">
+            <p>Attendance details will be shown here.</p>
+        </div>
+    </div>
+
+    <!-- TIMETABLE -->
+    <div id="timetable" class="section">
+        <h1>Time Table</h1>
+        <div class="card">
+            <p>Your class schedule will appear here.</p>
+        </div>
+    </div>
+
+    <!-- REPORT -->
+    <div id="report" class="section">
+        <h1>Report Card</h1>
+        <div class="card">
+            <p>Marks and grades will be displayed here.</p>
+        </div>
+    </div>
+
+    <!-- ASSIGNMENTS -->
+    <div id="assignment" class="section">
+        <h1>Assignments</h1>
+        <div class="card">
+            <p>Assignment submissions and status.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function showSection(sectionId) {
+    let sections = document.querySelectorAll(".section");
+    sections.forEach(sec => sec.classList.remove("active"));
+
+    document.getElementById(sectionId).classList.add("active");
+}
+
+// ✅ GET USER DATA
+let user = JSON.parse(localStorage.getItem("user"));
+let role = localStorage.getItem("role");
+
+// Show username
+if(user){
+    document.getElementById("welcomeText").innerText = "Welcome " + user.username;
+}
+
+// ✅ ROLE CHECK (THIS IS WHAT YOU ASKED)
+if(role === "admin"){
+    // 🔥 ADMIN FEATURES (example)
+    
+    let adminSection = document.createElement("div");
+    adminSection.innerHTML = `
+        <h1>Admin Panel</h1>
+        <div class="card">
+            <p>Manage users, view feedback, and control system.</p>
+        </div>
+    `;
+    document.querySelector(".main").appendChild(adminSection);
+
+} else {
+    // 🔥 NORMAL USER → NO ADMIN ACCESS
+    console.log("User mode active");
+}
+
+// LOGOUT
+function logout(){
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("role");
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
