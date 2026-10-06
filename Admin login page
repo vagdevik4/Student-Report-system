@@ -1,0 +1,164 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Admin Login</title> 
+
+<style> 
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', sans-serif; 
+} 
+
+body { 
+    min-height: 100vh; 
+    background: linear-gradient(135deg, #ff6a6a, #3a8dff); 
+    color: white; 
+} 
+
+/* NAVBAR */
+.navbar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 50px; 
+    background: rgba(255,255,255,0.1); 
+    backdrop-filter: blur(10px); 
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    z-index: 1000;
+} 
+
+.logo { 
+    font-size: 22px; 
+    font-weight: bold; 
+    color: white; 
+} 
+
+nav a { 
+    margin: 0 10px; 
+    text-decoration: none; 
+    color: white; 
+    font-size: 14px; 
+} 
+
+nav a:hover { 
+    text-decoration: underline; 
+} 
+
+/* CENTER */
+.center-box {
+    margin-top: 80px;
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARD */
+.container { 
+    width: 350px; 
+    padding: 30px; 
+    border-radius: 20px; 
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(15px); 
+    border: 1px solid rgba(255,255,255,0.3); 
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3); 
+} 
+
+h2 { 
+    text-align: center; 
+    margin-bottom: 25px; 
+} 
+
+.input-box { 
+    margin-bottom: 20px; 
+} 
+
+.input-box input { 
+    width: 100%; 
+    padding: 10px; 
+    background: transparent; 
+    border: none; 
+    border-bottom: 1px solid white; 
+    outline: none; 
+    color: white; 
+} 
+
+.input-box label { 
+    font-size: 14px; 
+    color: #ddd; 
+} 
+
+button { 
+    width: 100%; 
+    padding: 10px; 
+    border: none; 
+    border-radius: 8px; 
+    background: white; 
+    color: #333; 
+    font-size: 16px; 
+    cursor: pointer; 
+} 
+
+button:hover { 
+    background: #ddd; 
+} 
+</style> 
+</head> 
+
+<body> 
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">Student Report</div>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../contact.html">Contact</a>
+        <a href="../about.html">About</a>
+    </nav>
+</div>
+
+<!-- LOGIN -->
+<div class="center-box">
+    <div class="container">
+        <h2>Admin Login</h2>
+
+        <div class="input-box">
+            <label>Admin Username</label>
+            <input type="text" id="adminUser">
+        </div>
+
+        <div class="input-box">
+            <label>Password</label>
+            <input type="password" id="adminPass">
+        </div>
+
+        <button onclick="adminLogin()">Login</button>
+    </div>
+</div>
+
+<script>
+function adminLogin(){
+    let user = document.getElementById("adminUser").value;
+    let pass = document.getElementById("adminPass").value;
+
+    // DEMO credentials
+    if(user === "admin" && pass === "admin123"){
+        localStorage.setItem("role", "admin");
+        localStorage.setItem("isLoggedIn", "true");
+
+        alert("Admin Login Successful!");
+        window.location.href = "admin.html";
+    } else {
+        alert("Invalid Admin Credentials");
+    }
+}
+</script>
+
+</body> 
+</html>
