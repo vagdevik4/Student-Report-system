@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{display:flex;height:100vh;background:linear-gradient(135deg,#ff6a6a,#3a8dff);color:white;}
+
+.sidebar{
+    width:260px;
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+}
+
+.menu{flex-grow:1;}
+
+.sidebar a{
+    display:block;
+    margin:10px 0;
+    padding:10px;
+    border-radius:8px;
+    cursor:pointer;
+}
+.sidebar a:hover{background:rgba(255,255,255,0.2);}
+
+.main{flex:1;padding:40px;overflow:auto;}
+
+.card{
+    background:rgba(255,255,255,0.1);
+    padding:20px;
+    border-radius:15px;
+    margin-top:20px;
+}
+
+.section{display:none;}
+.active{display:block;}
+
+button{
+    margin:5px;
+    padding:6px 10px;
+    border:none;
+    border-radius:6px;
+    background:white;
+    cursor:pointer;
+}
+
+table{
+    width:100%;
+    margin-top:15px;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:8px;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+    text-align:left;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>Admin</h2>
+
+    <div class="menu">
+        <a onclick="showSection('analytics')">Dashboard</a>
+        <a onclick="showSection('users')">User Management</a>
+        <a onclick="showSection('reports')">Student Reports</a>
+        <a onclick="showSection('attendance')">Attendance</a>
+        <a onclick="showSection('assignment')">Assignments</a>
+        <a onclick="showSection('feedback')">Feedback</a>
+    </div>
+
+    <button onclick="logout()">Logout</button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- ANALYTICS -->
+<div id="analytics" class="section active">
+<h1>Dashboard Analytics</h1>
+<div class="card" id="stats"></div>
+</div>
+
+<!-- USER MANAGEMENT -->
+<div id="users" class="section">
+<h1>User Management</h1>
+
+<div class="card">
+<input placeholder="Username" id="newUser">
+<input placeholder="Email" id="newEmail">
+<button onclick="addUser()">Add User</button>
+
+<table id="userTable"></table>
+</div>
+</div>
+
+<!-- REPORTS -->
+<div id="reports" class="section">
+<h1>Student Reports</h1>
+<div class="card">
+<table id="reportTable"></table>
+</div>
+</div>
+
+<!-- ATTENDANCE -->
+<div id="attendance" class="section">
+<h1>Attendance</h1>
+<div class="card">
+<input placeholder="Student Name" id="attName">
+<input placeholder="%" id="attValue">
+<button onclick="updateAttendance()">Update</button>
+
+<ul id="attList"></ul>
+</div>
+</div>
+
+<!-- ASSIGNMENTS -->
+<div id="assignment" class="section">
+<h1>Assignments</h1>
+<div class="card">
+<input placeholder="Assignment title" id="assignInput">
+<button onclick="addAssignment()">Add</button>
+
+<ul id="assignList"></ul>
+</div>
+</div>
+
+<!-- FEEDBACK -->
+<div id="feedback" class="section">
+<h1>Feedback</h1>
+<div class="card">
+<table id="feedbackTable"></table>
+</div>
+</div>
+
+</div>
+
+<script>
+function showSection(id){
+    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+/* ================= USERS ================= */
+function getUsers(){
+    return JSON.parse(localStorage.getItem("users"))||[];
+}
+
+function saveUsers(users){
+    localStorage.setItem("users",JSON.stringify(users));
+}
+
+function addUser(){
+    let name=document.getElementById("newUser").value;
+    let email=document.getElementById("newEmail").value;
+
+    let users=getUsers();
+    users.push({name,email});
+    saveUsers(users);
+    loadUsers();
+}
+
+function deleteUser(i){
+    let users=getUsers();
+    users.splice(i,1);
+    saveUsers(users);
+    loadUsers();
+}
+
+function loadUsers(){
+    let users=getUsers();
+    let table="<tr><th>Name</th><th>Email</th><th>Action</th></tr>";
+
+    users.forEach((u,i)=>{
+        table+=`<tr>
+        <td>${u.name}</td>
+        <td>${u.email}</td>
+        <td>
+            <button onclick="deleteUser(${i})">Delete</button>
+        </td>
+        </tr>`;
+    });
+
+    document.getElementById("userTable").innerHTML=table;
+}
+
+/* ================= REPORTS ================= */
+function loadReports(){
+    let users=getUsers();
+    let table="<tr><th>Name</th><th>Marks</th><th>Action</th></tr>";
+
+    users.forEach((u,i)=>{
+        let marks=u.marks||"Not Set";
+        table+=`<tr>
+        <td>${u.name}</td>
+        <td>${marks}</td>
+        <td>
+        <button onclick="editMarks(${i})">Edit</button>
+        </td>
+        </tr>`;
+    });
+
+    document.getElementById("reportTable").innerHTML=table;
+}
+
+function editMarks(i){
+    let users=getUsers();
+    let m=prompt("Enter Marks");
+    users[i].marks=m;
+    saveUsers(users);
+    loadReports();
+}
+
+/* ================= FEEDBACK ================= */
+function loadFeedback(){
+    let data=JSON.parse(localStorage.getItem("feedbacks"))||[];
+    let table="<tr><th>Email</th><th>Phone</th><th>Message</th></tr>";
+
+    data.forEach(f=>{
+        table+=`<tr>
+        <td>${f.email}</td>
+        <td>${f.phone}</td>
+        <td>${f.message}</td>
+        </tr>`;
+    });
+
+    document.getElementById("feedbackTable").innerHTML=table;
+}
+
+/* ================= ATTENDANCE ================= */
+function updateAttendance(){
+    let name=document.getElementById("attName").value;
+    let val=document.getElementById("attValue").value;
+
+    let list=JSON.parse(localStorage.getItem("attendance"))||[];
+    list.push({name,val});
+    localStorage.setItem("attendance",JSON.stringify(list));
+    loadAttendance();
+}
+
+function loadAttendance(){
+    let list=JSON.parse(localStorage.getItem("attendance"))||[];
+    let html="";
+    list.forEach(a=>{
+        html+=`<li>${a.name} - ${a.val}%</li>`;
+    });
+    document.getElementById("attList").innerHTML=html;
+}
+
+/* ================= ASSIGNMENTS ================= */
+function addAssignment(){
+    let txt=document.getElementById("assignInput").value;
+
+    let list=JSON.parse(localStorage.getItem("assignments"))||[];
+    list.push(txt);
+    localStorage.setItem("assignments",JSON.stringify(list));
+    loadAssignments();
+}
+
+function loadAssignments(){
+    let list=JSON.parse(localStorage.getItem("assignments"))||[];
+    let html="";
+    list.forEach((a,i)=>{
+        html+=`<li>${a} <button onclick="deleteAssign(${i})">Delete</button></li>`;
+    });
+    document.getElementById("assignList").innerHTML=html;
+}
+
+function deleteAssign(i){
+    let list=JSON.parse(localStorage.getItem("assignments"))||[];
+    list.splice(i,1);
+    localStorage.setItem("assignments",JSON.stringify(list));
+    loadAssignments();
+}
+
+/* ================= ANALYTICS ================= */
+function loadStats(){
+    let users=getUsers().length;
+    let feedback=(JSON.parse(localStorage.getItem("feedbacks"))||[]).length;
+    let reports=users;
+
+    document.getElementById("stats").innerHTML=`
+    <h3>Users: ${users}</h3>
+    <h3>Feedbacks: ${feedback}</h3>
+    <h3>Reports: ${reports}</h3>
+    `;
+}
+
+/* ================= INIT ================= */
+loadUsers();
+loadReports();
+loadFeedback();
+loadAttendance();
+loadAssignments();
+loadStats();
+
+/* ================= AUTH ================= */
+if(localStorage.getItem("role")!=="admin"){
+    alert("Access Denied");
+    window.location.href="login.html";
+}
+
+function logout(){
+    localStorage.removeItem("role");
+    window.location.href="login.html";
+}
+</script>
+
+</body>
+</html>
