@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Report System</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #ff6a6a, #3a8dff);
+    color: white;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* HERO SECTION */
+.hero {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 500px;
+    padding: 40px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.card h1 {
+    margin-bottom: 15px;
+}
+
+.card p {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* FOOTER */
+footer {
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+footer a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div id="navbar"></div>
+    <div class="logo"> Student Report</div>
+   <nav>
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="about.html">About</a>
+    <a href="login.html">Login</a>
+    <a href="register.html">Register</a>
+</nav>
+
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="card">
+        <h1>Student Report System</h1>
+        <p>
+    The <b>Student Report System</b> is a modern, web-based platform designed to streamline 
+    academic management and enhance transparency between students, teachers, and institutions. 
+    It provides a centralized system to efficiently track student performance, monitor attendance, 
+    and manage academic records in real time.
+</p>
+
+<p>
+    The platform enables students to access their reports, assignments, and progress insights, 
+    while educators can manage data, evaluate performance, and generate detailed reports with ease. 
+    By integrating user-friendly design with smart functionalities, the system reduces manual effort 
+    and improves overall efficiency in academic workflows.
+</p>
+
+<p>
+    Built with a focus on simplicity, scalability, and accessibility, the Student Report System 
+    ensures a seamless experience for all users, making academic monitoring more structured, 
+    reliable, and effective.
+</p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer> 
+    <p>© 2026 Student Report System</p> 
+    <div> 
+        <a href="contact.html">Contact</a> | 
+        <a href="terms.html">Terms & Services</a> 
+    </div> 
+</footer>
+
+</body>
+</script>
+</html>
