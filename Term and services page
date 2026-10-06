@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Services</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #ff6a6a, #3a8dff);
+    color: white;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+/* CONTENT */
+.container {
+    max-width: 800px;
+    margin: 100px auto;
+    padding: 30px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-top: 20px;
+}
+
+p, li {
+    font-size: 14px;
+    line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">Student Report</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+    </nav>
+</div>
+
+<!-- TERMS CONTENT -->
+<div class="container">
+    <h1>Terms & Services</h1>
+    <p><b>Last Updated:</b> September 30, 2026</p>
+
+    <h3>1. User Accounts</h3>
+    <p>Users must provide accurate information and are responsible for maintaining the confidentiality of their login credentials.</p>
+
+    <h3>2. Data Privacy</h3>
+    <p>All student data such as grades and attendance belongs to the institution. We act only as a data processor.</p>
+
+    <h3>3. Acceptable Use</h3>
+    <ul>
+        <li>Do not attempt to access unauthorized data</li>
+        <li>Do not upload harmful or illegal content</li>
+        <li>Do not misuse the system</li>
+    </ul>
+
+    <h3>4. Notifications</h3>
+    <p>The system may send alerts via email or messages regarding updates, attendance, and reports.</p>
+
+    <h3>5. Limitation of Liability</h3>
+    <p>The service is provided "as-is". We are not responsible for errors in data entered by users.</p>
+
+    <h3>6. Changes to Terms</h3>
+    <p>We may update these terms at any time. Continued use means you accept the updated terms.</p>
+
+    <h3>7. Contact</h3>
+    <p>Email: support@studentreport.com</p>
+</div>
+
+</body>
+</html>
